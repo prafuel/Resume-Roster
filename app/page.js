@@ -113,7 +113,7 @@ export default function Home() {
           )}
         </form>
         <div className="text-center mt-6 text-gray-400">
-          Created by <a href="https://github.com/prafuel" className="text-orange-500 hover:underline">@prafull</a>
+          Created by <a href="https://github.com/prafuel" className="text-orange-500 hover:underline">@prafuel</a>
         </div>
       </div>
     </div>
