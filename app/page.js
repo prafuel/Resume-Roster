@@ -4,6 +4,9 @@ import { useState, useRef } from 'react';
 import { ClipLoader } from 'react-spinners';
 import html2canvas from 'html2canvas';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload, faShareNodes  } from "@fortawesome/free-solid-svg-icons";
+
 export default function Home() {
   const [file, setFile] = useState(null);
   const [result, setResult] = useState("");
@@ -75,9 +78,8 @@ export default function Home() {
           </div>
           <button
             type="submit"
-            className={`w-full py-3 px-5 rounded-lg text-white font-semibold transition-colors duration-300 ${
-              loading ? "bg-orange-500 cursor-not-allowed" : "bg-orange-600 hover:bg-orange-700"
-            }`}
+            className={`w-full py-3 px-5 rounded-lg text-white font-semibold transition-colors duration-300 ${loading ? "bg-orange-500 cursor-not-allowed" : "bg-orange-600 hover:bg-orange-700"
+              }`}
             disabled={loading}
           >
             {loading ? "Uploading..." : "Upload File"}
@@ -89,24 +91,30 @@ export default function Home() {
           )}
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
           {result && (
-            <div
-              ref={resultRef}
-              className="mt-8 p-6 border border-gray-600 rounded-lg bg-gray-700 shadow-sm text-center"
-            >
-              <h2 className="text-2xl font-semibold text-orange-400 mb-3"></h2>
-              <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{result}</p>
-              <div className="mt-6 flex justify-around">
+            <div className="w-full">
+              <div
+                ref={resultRef}
+                className="mt-8 p-6 border border-gray-600 rounded-lg bg-gray-700 shadow-sm text-center"
+              >
+                <h2 className="text-2xl font-semibold text-orange-400 mb-3"></h2>
+                <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{result}</p>
+
+              </div>
+
+              <div className="mt-6 flex justify-around gap-2">
                 <button
                   onClick={handleShare}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-1/2"
                 >
-                  Share on Twitter
+                  {/* Share */}
+                  <FontAwesomeIcon icon={faShareNodes} />
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg w-1/2"
                 >
-                  Download as Image
+                  {/* Download */}
+                  <FontAwesomeIcon icon={faDownload} />
                 </button>
               </div>
             </div>
