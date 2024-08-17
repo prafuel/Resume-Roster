@@ -5,7 +5,7 @@ import { ClipLoader } from 'react-spinners';
 import html2canvas from 'html2canvas';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faShareNodes  } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [file, setFile] = useState(null);
@@ -60,12 +60,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-8">
-      <div className="w-full max-w-2xl bg-gray-800 shadow-lg rounded-xl p-10 border border-gray-700">
-        <h1 className="text-4xl font-extrabold text-orange-400 mb-6 text-center">Resume Roaster</h1>
-        <form onSubmit={handleSubmit} className="space-y-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-4 sm:p-8">
+      <div className="w-full max-w-lg sm:max-w-2xl bg-gray-800 shadow-lg rounded-xl p-6 sm:p-10 border border-gray-700">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-400 mb-4 sm:mb-6 text-center">Resume Roaster</h1>
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
           <div>
-            <label className="block text-orange-300 text-sm font-medium mb-2" htmlFor="file">
+            <label className="block text-orange-300 text-sm sm:text-base font-medium mb-2" htmlFor="file">
               Upload your Resume and get BADLY ROASTED by Ai..
             </label>
             <input
@@ -73,12 +73,12 @@ export default function Home() {
               id="file"
               accept=".pdf"
               onChange={handleFileChange}
-              className="block w-full text-gray-200 bg-gray-700 border border-gray-600 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="block w-full text-gray-200 bg-gray-700 border border-gray-600 rounded-lg p-2 sm:p-3 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
           </div>
           <button
             type="submit"
-            className={`w-full py-3 px-5 rounded-lg text-white font-semibold transition-colors duration-300 ${loading ? "bg-orange-500 cursor-not-allowed" : "bg-orange-600 hover:bg-orange-700"
+            className={`w-full py-2 sm:py-3 px-4 sm:px-5 rounded-lg text-white font-semibold transition-colors duration-300 ${loading ? "bg-orange-500 cursor-not-allowed" : "bg-orange-600 hover:bg-orange-700"
               }`}
             disabled={loading}
           >
@@ -94,33 +94,30 @@ export default function Home() {
             <div className="w-full">
               <div
                 ref={resultRef}
-                className="mt-8 p-6 border border-gray-600 rounded-lg bg-gray-700 shadow-sm text-center"
+                className="mt-6 sm:mt-8 p-4 sm:p-6 border border-gray-600 rounded-lg bg-gray-700 shadow-sm text-center"
               >
-                <h2 className="text-2xl font-semibold text-orange-400 mb-3"></h2>
-                <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{result}</p>
-
+                <h2 className="text-xl sm:text-2xl font-semibold text-orange-400 mb-2 sm:mb-3"></h2>
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{result}</p>
               </div>
 
-              <div className="mt-6 flex justify-around gap-2">
+              <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-around gap-2">
                 <button
                   onClick={handleShare}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-1/2"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full sm:w-1/2"
                 >
-                  {/* Share */}
                   <FontAwesomeIcon icon={faShareNodes} />
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg w-1/2"
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg w-full sm:w-1/2"
                 >
-                  {/* Download */}
                   <FontAwesomeIcon icon={faDownload} />
                 </button>
               </div>
             </div>
           )}
         </form>
-        <div className="text-center mt-6 text-gray-400">
+        <div className="text-center mt-6 text-gray-400 text-xs sm:text-sm">
           Created by <a href="https://github.com/prafuel" className="text-orange-500 hover:underline">@prafuel</a>
         </div>
       </div>
