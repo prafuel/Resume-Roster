@@ -94,10 +94,10 @@ export default function Home() {
             <div className="w-full">
               <div
                 ref={resultRef}
-                className="mt-6 sm:mt-8 p-4 sm:p-6 border border-gray-600 rounded-lg bg-gray-700 shadow-sm text-center"
+                className="mt-6 sm:mt-8 p-4 sm:p-6 border-2 border-white bg-gray-700 shadow-sm text-center"
               >
                 <h2 className="text-xl sm:text-2xl font-semibold text-orange-400 mb-2 sm:mb-3"></h2>
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{result}</p>
+                <p className="text-white text-sm sm:text-base leading-relaxed whitespace-pre-wrap">{result}</p>
               </div>
 
               <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-around gap-2">
