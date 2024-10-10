@@ -31,3 +31,27 @@ body {
     text-wrap: balance;
   }
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Customizing the scrollbar for the entire page */
+::-webkit-scrollbar {
+  width: 3px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1b1b1b00; /* Background color of the scrollbar track */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar color */
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Scrollbar color on hover */
+}
