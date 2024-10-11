@@ -5,13 +5,13 @@ import { ClipLoader } from 'react-spinners';
 import html2canvas from 'html2canvas';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faDownload, faMultiply, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [character, setCharacter] = useState("");
+  const [character, setCharacter] = useState("Roaster");
   const [resultsHistory, setResultsHistory] = useState([]); // State for history
 
   const defaultCharacters = [
@@ -24,7 +24,8 @@ export default function Home() {
     { name: "Saitama", emoji: "👊" }
   ];
 
-  const url = "https://prafuel-r2.hf.space/roast"
+  // const url = "https://prafuel-r2.hf.space/roast"
+  const url = "http://127.0.0.1:8000/roast"
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -34,7 +35,11 @@ export default function Home() {
     e.preventDefault();
     if (!file) return;
 
-    if (!character) setCharacter("Roaster");
+    if(character == ""){
+      setCharacter("Roaster")
+    }
+
+    console.log(character);
 
     setLoading(true);
     setError("");
@@ -53,7 +58,7 @@ export default function Home() {
 
       const data = await response.json();
       const timestamp = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      setResultsHistory((prev) => [...prev, { output: data.output, timestamp }]); // Append result and timestamp to history
+      setResultsHistory((prev) => [...prev, { output: data.output, timestamp, character: character }]); // Append result and timestamp to history
     } catch (err) {
       setError(err.message);
     } finally {
@@ -75,6 +80,15 @@ export default function Home() {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(result)}`;
     window.open(twitterUrl, "_blank");
   };
+
+  const handleDelete = (index) => {
+    // Create a new array excluding the item at the specified index
+    const updatedHistory = resultsHistory.filter((_, i) => i !== index);
+
+    // Update the state with the new array
+    setResultsHistory(updatedHistory);
+  };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-4 sm:p-8">
@@ -147,12 +161,27 @@ export default function Home() {
               <div
                 key={index}
                 id={`result-${index}`}
-                className="flex-shrink-0 min-w-[250px] w-1/3 h-[500px] p-4 border-2 border-gray-600 bg-gray-700 shadow-md text-center flex flex-col justify-between"
+                className="relative flex-shrink-0 min-w-[290px] w-1/2 h-[500px] p-4 border-2 border-gray-600 bg-gray-700 shadow-md text-center flex flex-col justify-between rounded-lg"
               >
-                <div className="flex items-center justify-center bg-gray-600 h-12">
-                  <h3 className="text-white text-lg font-bold text-justify p-2">{historyResult.timestamp}</h3>
+                {/* Heading and Cross button in Flex */}
+                <div className="flex items-center justify-between bg-gray-600 h-14 w-full rounded-t-lg">
+                  <h2 className="text-white text-lg font-bold px-2">{historyResult.timestamp}</h2>
+                  <button
+                    onClick={() => handleDelete(index)}
+                    className="bg-red-600 text-white h-full hover:bg-red-700 focus:outline-none p-4"
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
                 </div>
-                <p className="text-white leading-relaxed overflow-y-auto flex-grow py-2 text-sm text-center">{historyResult.output}</p>
+
+                <span className="text-gray-300 text-sm">({historyResult.character})</span>
+                <p
+                  style={{ whiteSpace: 'pre-wrap' }}
+                  className="text-white leading-relaxed overflow-y-auto flex-grow py-2 text-md text-center"
+                >
+                  {historyResult.output}
+                </p>
+
                 <button
                   onClick={() => handleDownload(index)} // Pass the index for unique downloads
                   className="mt-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
@@ -164,6 +193,9 @@ export default function Home() {
           </div>
         </div>
       )}
+
+
+
 
       <div className="text-center mt-6 text-gray-400 text-xs sm:text-sm">
         Created by <a href="https://github.com/prafuel" className="text-orange-500 hover:underline">@prafuel</a>
