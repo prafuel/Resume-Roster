@@ -24,8 +24,8 @@ export default function Home() {
     { name: "Saitama", emoji: "👊" }
   ];
 
-  // const url = "https://prafuel-r2.hf.space/roast"
-  const url = "http://127.0.0.1:8000/roast"
+  const url = "https://prafuel-r2.hf.space/roast"
+  // const url = "http://127.0.0.1:8000/roast"
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
